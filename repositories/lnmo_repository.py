@@ -5,21 +5,20 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from models.transaction import Transaction
 from typing import Dict, Any, Optional
+import os
 
 
 class LNMORepository:
     # Hardcoded configurations
-    MPESA_LNMO_CONSUMER_KEY = "LO5CCWw0F9QdXWVOMURJGUA8OIEGJ4kL53b2e5ZCm4nKCs7J"
-    MPESA_LNMO_CONSUMER_SECRET = (
-        "yWbM4wSsOY7CMK4vhdkCgVAcZiBFLA3FtNQV2E3M4odi9gEXXjaHkfcoH42rEsv6"
-    )
-    MPESA_LNMO_ENVIRONMENT = "sandbox"
-    MPESA_LNMO_INITIATOR_PASSWORD = "Safaricom123!!"
-    MPESA_LNMO_INITIATOR_USERNAME = "testapi"
-    MPESA_LNMO_PASS_KEY = (
-        "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
-    )
-    MPESA_LNMO_SHORT_CODE = "174379"
+    MPESA_LNMO_CONSUMER_KEY = os.getenv("MPESA_LNMO_CONSUMER_KEY")
+    MPESA_LNMO_CONSUMER_SECRET = os.getenv("MPESA_LNMO_CONSUMER_SECRET")
+    MPESA_LNMO_ENVIRONMENT = os.getenv("MPESA_LNMO_ENVIRONMENT")
+    MPESA_LNMO_INITIATOR_PASSWORD = os.getenv("MPESA_LNMO_INITIATOR_PASSWORD")
+    MPESA_LNMO_INITIATOR_USERNAME = os.getenv("MPESA_LNMO_INITIATOR_USERNAME")
+    MPESA_LNMO_PASS_KEY = os.getenv("MPESA_LNMO_PASS_KEY")
+    MPESA_LNMO_SHORT_CODE = os.getenv("MPESA_LNMO_SHORT_CODE")
+
+    MPESA_LNMO_CALLBACK_URL = os.getenv("MPESA_LNMO_CALLBACK_URL")
 
     async def transact(self, data: Dict[str, Any], db: AsyncSession) -> Dict[str, Any]:
         """Handle MPESA LNMO transaction"""
@@ -37,7 +36,7 @@ class LNMORepository:
             "PartyA": data["PhoneNumber"],
             "PartyB": self.MPESA_LNMO_SHORT_CODE,
             "PhoneNumber": data["PhoneNumber"],
-            "CallBackURL": "https://3c96-197-237-26-50.ngrok-free.app/ipn/daraja/lnmo/callback",
+            "CallBackURL": self.MPESA_LNMO_CALLBACK_URL,
             "AccountReference": data["AccountReference"],
             "TransactionDesc": "Payment for order " + data["AccountReference"],
         }
