@@ -8,6 +8,7 @@ from typing import Dict, Any, Optional
 import os
 
 
+
 class LNMORepository:
     # Hardcoded configurations
     MPESA_LNMO_CONSUMER_KEY = os.getenv("MPESA_LNMO_CONSUMER_KEY")
