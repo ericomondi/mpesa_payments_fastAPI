@@ -6,6 +6,8 @@ from repositories.lnmo_repository import LNMORepository
 from database import get_database
 from typing import Dict, Any
 
+
+
 router = APIRouter(prefix="/ipn/daraja/lnmo", tags=["LNMO"])
 lnmo_repository = LNMORepository()
 

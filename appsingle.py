@@ -109,7 +109,7 @@ class LNMORepository:
             "PartyA": data["PhoneNumber"],
             "PartyB": self.MPESA_LNMO_SHORT_CODE,
             "PhoneNumber": data["PhoneNumber"],
-            "CallBackURL": "https://be5f-197-237-26-50.ngrok-free.app/ipn/daraja/lnmo/callback",
+            "CallBackURL": "https://d270-197-237-26-50.ngrok-free.app/ipn/daraja/lnmo/callback",
             "AccountReference": data["AccountReference"],
             "TransactionDesc": "Payment for order " + data["AccountReference"],
         }
